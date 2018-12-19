@@ -15,9 +15,9 @@ $('.frog').click(function () {
 function displayFrogs() {
   for (let i = 0; i < posArray.length; i++) {
     if (posArray[i] == FROG.red.color) {
-      $('#pos' + i).html('<img src="' + FROG.red.img + '" alt="red frog" >');
+      $('#pos' + i).html('<img class="clickable" src="' + FROG.red.img + '" alt="red frog" >');
     } else if (posArray[i] == FROG.green.color) {
-      $('#pos' + i).html('<img src="' + FROG.green.img + '" alt="green frog" >');
+      $('#pos' + i).html('<img class="clickable" src="' + FROG.green.img + '" alt="green frog" >');
     } else {
       $('#pos' + i).html('<img src="imgs/blankSpace.png" alt="" >');
     }
@@ -48,8 +48,3 @@ function makeMove(index) {
   displayFrogs();
   console.log(posArray);
 }
-
-// window.onload = function() {
-//   let ctx = document.getElementById('canvas').getContext('2d');
-//   // ctx.drawImage(document.getElementById('background'), 0, 0);
-// }
