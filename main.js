@@ -1,11 +1,20 @@
 const FROG = {
-  green: {color: 'green', img: 'imgs/frogGreen.png'},
-  red: {color: 'red', img: 'imgs/frogRed.png'}
+  green: {
+    color: 'green',
+    img: 'imgs/frogGreen.png'
+  },
+  red: {
+    color: 'red',
+    img: 'imgs/frogRed.png'
+  }
 };
 
 const BLANK_SPACE = "blank";
+const START_ARRAY = [FROG.red.color, FROG.red.color, FROG.red.color, BLANK_SPACE, FROG.green.color, FROG.green.color, FROG.green.color];
 
-let posArray = [FROG.red.color, FROG.red.color, FROG.red.color, BLANK_SPACE, FROG.green.color, FROG.green.color, FROG.green.color];
+let posArray = START_ARRAY.slice();
+let prevArray = [];
+prevArray.push(START_ARRAY.slice());
 
 $('.frog').click(function () {
   let pos = $(this).index();
@@ -25,6 +34,8 @@ function displayFrogs() {
 }
 
 function makeMove(index) {
+  if (!compareArrays(prevArray[prevArray.length - 1], posArray))
+    prevArray.push(posArray.slice());
   switch (posArray[index]) {
     case FROG.red.color:
       if (posArray[index + 1] == BLANK_SPACE) {
@@ -46,5 +57,34 @@ function makeMove(index) {
       break;
   };
   displayFrogs();
-  console.log(posArray);
+}
+
+function resetFrogs() {
+  posArray = START_ARRAY.slice();
+  prevArray = [];
+  prevArray.push(START_ARRAY.slice());
+  displayFrogs();
+}
+
+function compareArrays(x, y) {
+  if (x.length != y.length)
+    return false;
+  for (var i = 0; i < x.length; i++) {
+    if (x[i] != y[i])
+      return false;
+  }
+  return true;
+}
+
+function undo() {
+  if (prevArray[prevArray.length - 1] != null) {
+    if (compareArrays(prevArray[prevArray.length - 1], posArray) && prevArray.length > 1) {
+      prevArray.pop();
+    }
+    posArray = prevArray[prevArray.length - 1].slice();
+    if (prevArray.length > 1) {
+      prevArray.pop();
+    }
+  }
+  displayFrogs();
 }
