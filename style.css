@@ -34,3 +34,21 @@ ul {
   height: auto;
   z-index: -1;
 }
+
+button {
+  padding: 10px 15px;
+  border-radius: 30px;
+  background: green;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background: lightgreen;
+}
+
+.buttons {
+  margin: 6vw;
+}
