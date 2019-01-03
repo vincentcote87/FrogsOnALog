@@ -1,19 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.canvas {
-  z-index: 99;
-}
-
-.frog {
-  display: inline-block;
-  width: 10vw;
-  padding: 0 .5em;
-}
-
-li img {
+.frog img {
   width: 100%;
 }
 
@@ -21,34 +6,52 @@ li img {
   cursor: pointer;
 }
 
-ul {
-  position: relative;
-  text-align: center;
-  padding-top: 25vw;
-  min-width: 700px;
+#frogList {
+  list-style: none;
 }
 
-#background {
-  position: fixed;
-  width: 100vw;
-  height: auto;
-  z-index: -1;
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: url(imgs/background.jpg);
+  background-size: cover;
+  width: 98vw;
+  height: calc(98vw * 0.53);
 }
 
-button {
-  padding: 10px 15px;
-  border-radius: 30px;
-  background: green;
-  border: none;
-  font-size: 2em;
+.frogGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  padding: 0 10vw;
+}
+
+.frog {
+  grid-column: span 1;
+  grid-row: 3;
+  padding-bottom: 5vw;
+}
+
+.btns {
+  grid-column: span 1;
+  grid-row: 1;
   cursor: pointer;
-  margin: 5px;
+  align-self: center; 
+  border: solid 1px #6390e4;
+  border-radius: 2em;
+  padding: 1em 1.75em;
+  background: #6390e4;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-button:hover {
-  background: lightgreen;
+.btns:hover {
+  background: #a4bef0;
+  text-decoration: underline;
+  border: solid 1px #a4bef0;
 }
 
-.buttons {
-  margin: 6vw;
+.counter {
+  grid-column: span 1;
+  align-self: center;
 }

@@ -31,7 +31,7 @@
       cursor: pointer;
     }
 
-    ul {
+    .canvas ul {
       position: relative;
       text-align: center;
       padding-top: 25vw;
@@ -45,7 +45,7 @@
       z-index: -1;
     }
 
-    button {
+    .buttons button {
       padding: 10px 15px;
       border-radius: 30px;
       background: green;
@@ -55,7 +55,7 @@
       margin: 5px;
     }
 
-    button:hover {
+    .buttons button:hover {
       background: lightgreen;
     }
 
