@@ -32,7 +32,7 @@
   padding-bottom: 5vw;
 }
 
-.btn {
+.btns {
   grid-column: span 1;
   grid-row: 1;
   cursor: pointer;
@@ -45,8 +45,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.btn:hover {
+.btns:hover {
   background: #a4bef0;
   text-decoration: underline;
   border: solid 1px #a4bef0;
+}
+
+.counter {
+  grid-column: span 1;
+  align-self: center;
 }
