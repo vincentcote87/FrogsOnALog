@@ -10,18 +10,50 @@ const FROG = {
 };
 
 const BLANK_SPACE = "blank";
-let START_ARRAY = [FROG.red.color, FROG.red.color, FROG.red.color, BLANK_SPACE, FROG.green.color, FROG.green.color, FROG.green.color];
-let FINAL_ARRAY = [FROG.green.color, FROG.green.color, FROG.green.color, BLANK_SPACE, FROG.red.color, FROG.red.color, FROG.red.color];
+let START_ARRAY = [];
+let FINAL_ARRAY = [];
 
-let posArray = START_ARRAY.slice();
+let posArray = [];
 let prevArray = [];
 let counter = 0;
-prevArray.push(START_ARRAY.slice());
 
-$('.frog').click(function () {
-  let pos = $(this).index();
-  makeMove(pos);
-});
+setFrogNum($('#frogNumberSelector').children('option:selected').val());
+
+function setFrogNum(num) {
+  let columns = Number((num * 2) + 1);
+  $('.frog').remove();
+  counter = 0;
+  buildArrays(num);
+  prevArray = [];
+  posArray = [];
+  prevArray.push(START_ARRAY.slice());
+  posArray = START_ARRAY.slice();
+  buildFrogs();
+  $('.frogGrid').css('grid-template-columns', 'repeat(' + columns + ', 1fr)');
+  displayFrogs();
+}
+
+function buildArrays(num) {
+  START_ARRAY = [BLANK_SPACE];
+  FINAL_ARRAY = [BLANK_SPACE];
+  for (let i = 0; i < num; i++) {
+    START_ARRAY.unshift(FROG.red.color);
+    START_ARRAY.push(FROG.green.color);
+    FINAL_ARRAY.unshift(FROG.green.color);
+    FINAL_ARRAY.push(FROG.red.color);
+  }
+}
+
+function buildFrogs() {
+  let list = document.getElementById('frogList');
+  for (let i = 0; i < START_ARRAY.length; i++) {
+    let listItem = document.createElement('li');
+    listItem.setAttribute('id', 'pos' + i);
+    listItem.setAttribute('class', 'frog');
+    document.getElementById('frogList').appendChild(listItem);
+
+  }
+}
 
 function displayFrogs() {
   $('#counter').html(counter);
@@ -101,3 +133,13 @@ function undo() {
     counter--;
   displayFrogs();
 }
+
+$('#frogNumberSelector').change(function() {
+  setFrogNum($(this).children('option:selected').val());
+});
+
+$(document).on('click', '.frog', function() {
+  let pos = $(this).index();
+  // - 3 since the index of the list already has 3 elements for the buttons
+  makeMove(pos - 3);
+});

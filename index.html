@@ -10,15 +10,15 @@
 
 <body>
 
+    <div class="frogNum">
+        <select name="frogs" id="frogNumberSelector">
+            <option value="2" selected>4 Frogs</option>
+            <option value="3">6 Frogs</option>
+            <option value="4">8 Frogs</option>
+        </select>
+    </div>
     <div class="mainGrid">
         <ul id="frogList" class="frogGrid">
-            <li class="frog" id="pos0"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
-            <li class="frog" id="pos1"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
-            <li class="frog" id="pos2"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
-            <li class="frog" id="pos3"><img src="imgs/blankSpace.png" alt=""></li>
-            <li class="frog" id="pos4"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
-            <li class="frog" id="pos5"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
-            <li class="frog" id="pos6"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
             <li class="btns" onclick="resetFrogs()"><span>Reset</span></li>
             <li class="btns" onclick="undo()"><span>Undo</span></li>
             <li class="counter">Your moves: <span id="counter">0</span></li>
