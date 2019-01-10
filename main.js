@@ -11,21 +11,21 @@ const FROG = {
 
 const BLANK_SPACE = "blank";
 let START_ARRAY = [];
-// let START_ARRAY = [FROG.red.color, FROG.red.color, FROG.red.color, BLANK_SPACE, FROG.green.color, FROG.green.color, FROG.green.color];
 let FINAL_ARRAY = [];
 
-// let posArray = START_ARRAY.slice();
 let posArray = [];
 let prevArray = [];
 let counter = 0;
-// prevArray.push(START_ARRAY.slice());
 
 setFrogNum($('#frogNumberSelector').children('option:selected').val());
 
 function setFrogNum(num) {
   let columns = Number((num * 2) + 1);
+  $('.frog').remove();
+  counter = 0;
   buildArrays(num);
   prevArray = [];
+  posArray = [];
   prevArray.push(START_ARRAY.slice());
   posArray = START_ARRAY.slice();
   buildFrogs();
@@ -46,15 +46,6 @@ function buildArrays(num) {
 
 function buildFrogs() {
   let list = document.getElementById('frogList');
-  for (let i = 0; i < list.children.length; i++) {
-    // console.log(list.children[i].className == 'frog');
-    if (list.children[i].className == 'frog') {
-      console.log('here');
-      list.removeChild(list.children[i]);
-
-    }
-  }
-  console.log(list);
   for (let i = 0; i < START_ARRAY.length; i++) {
     let listItem = document.createElement('li');
     listItem.setAttribute('id', 'pos' + i);
@@ -145,9 +136,9 @@ function undo() {
 
 $('#frogNumberSelector').change(function() {
   setFrogNum($(this).children('option:selected').val());
-})
+});
 
-$('.frog').click(function () {
+$(document).on('click', '.frog', function() {
   let pos = $(this).index();
   // - 3 since the index of the list already has 3 elements for the buttons
   makeMove(pos - 3);
