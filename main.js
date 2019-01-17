@@ -16,6 +16,7 @@ let FINAL_ARRAY = [];
 let posArray = [];
 let prevArray = [];
 let counter = 0;
+let move = "N/A";
 
 setFrogNum($('#frogNumberSelector').children('option:selected').val());
 
@@ -31,6 +32,8 @@ function setFrogNum(num) {
   buildFrogs();
   $('.frogGrid').css('grid-template-columns', 'repeat(' + columns + ', 1fr)');
   displayFrogs();
+  addToTable();
+  emptyTable();
 }
 
 function buildArrays(num) {
@@ -68,6 +71,32 @@ function displayFrogs() {
   }
 }
 
+function addToTable() {
+  let table = document.getElementById('moveTable');
+  let tableRow = document.createElement('tr');
+  let stepNum = document.createElement('td');
+  let posStr = '';
+  let curPos = document.createElement('td');
+  let moveMade = document.createElement('td');
+  stepNum.textContent = counter;
+  for (let i = 0; i < posArray.length; ++i) {
+    switch (posArray[i]) {
+      case FROG.red.color:
+        posStr += 'R '; break;
+      case FROG.green.color:
+        posStr += 'G '; break;
+      default:
+        posStr += 'S '
+    }
+  }
+  curPos.textContent = posStr;
+  moveMade.textContent = move;
+  tableRow.appendChild(stepNum);
+  tableRow.appendChild(curPos);
+  tableRow.appendChild(moveMade);
+  table.appendChild(tableRow);
+}
+
 function makeMove(index) {
   if (!compareArrays(prevArray[prevArray.length - 1], posArray))
     prevArray.push(posArray.slice());
@@ -76,22 +105,30 @@ function makeMove(index) {
       if (posArray[index + 1] == BLANK_SPACE) {
         posArray[index + 1] = FROG.red.color;
         posArray[index] = BLANK_SPACE;
+        move = "Shift Right";
         counter++;
+        addToTable();
       } else if (posArray[index + 2] == BLANK_SPACE) {
         posArray[index + 2] = FROG.red.color;
         posArray[index] = BLANK_SPACE;
+        move = "Jump Right";
         counter++;
+        addToTable();
       }
       break;
     case FROG.green.color:
       if (posArray[index - 1] == BLANK_SPACE) {
         posArray[index - 1] = FROG.green.color;
         posArray[index] = BLANK_SPACE;
+        move = "Shift Left";
         counter++;
+        addToTable();
       } else if (posArray[index - 2] == BLANK_SPACE) {
         posArray[index - 2] = FROG.green.color;
         posArray[index] = BLANK_SPACE;
+        move = "Jump Left";
         counter++;
+        addToTable();
       }
       break;
   };
@@ -107,6 +144,7 @@ function resetFrogs() {
   prevArray.push(START_ARRAY.slice());
   counter = 0;
   displayFrogs();
+  emptyTable();
 }
 
 function compareArrays(x, y) {
@@ -132,6 +170,17 @@ function undo() {
   if (!compareArrays(prevArray, posArray) && counter > 0)
     counter--;
   displayFrogs();
+  let tableRow = document.getElementById('moveTable').rows.length;
+  if (tableRow > 2) {
+    document.getElementById('moveTable').deleteRow(tableRow - 1);
+  }
+}
+
+function emptyTable() {
+  let table = document.getElementById('moveTable');
+  while (table.rows.length > 2) {
+    table.deleteRow(2);
+  }
 }
 
 $('#frogNumberSelector').change(function() {
