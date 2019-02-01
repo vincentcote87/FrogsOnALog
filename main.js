@@ -183,6 +183,24 @@ function emptyTable() {
   }
 }
 
+function giveInstruct(move) {
+  switch (move) {
+    case 'SL':
+    case 'JL':
+    case 'SR':
+    case 'JR':
+  }
+}
+
+function getPos (arr, element) {
+  for (let [index, item] of arr.entries()) {
+    if (item == element) {
+      return index;
+    }
+  }
+  return -1;
+};
+
 $('#frogNumberSelector').change(function() {
   setFrogNum($(this).children('option:selected').val());
 });
