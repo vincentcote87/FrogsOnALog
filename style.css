@@ -56,19 +56,19 @@
   align-self: center;
 }
 
-table {
+#moveTable {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 60%;
 }
 
-td,
+#moveTable > td,
 th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
+#moveTable > tr:nth-child(even) {
   background-color: #dddddd;
 }
